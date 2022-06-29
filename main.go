@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -16,10 +17,19 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	router.GET("/html", func(c *gin.Context) {
-		time.Sleep(3 * time.Second)
+	router.GET("/html/:id", func(c *gin.Context) {
+		id := c.Param("id")
+		q := c.DefaultQuery("q", "none")
+		employees, _ := c.GetQueryArray("name")
+
+		show, _ := strconv.ParseBool(c.DefaultQuery("show", "true"))
+
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"type": "html",
+			"id":        id,
+			"type":      "html",
+			"query":     q,
+			"employees": employees,
+			"show":      show,
 		})
 	})
 

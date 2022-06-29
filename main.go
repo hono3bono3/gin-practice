@@ -16,9 +16,11 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/html", func(c *gin.Context) {
 		time.Sleep(3 * time.Second)
-		c.HTML(200, "index.html", gin.H{})
+		c.HTML(http.StatusOK, "index.html", gin.H{
+			"type": "html",
+		})
 	})
 
 	srv := &http.Server{

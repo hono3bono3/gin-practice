@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Hello World!!</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Hello World!!!</h1>
-</body>
+    <div>
+      <div>id: {{ .id }}</div>
+      <div>type: {{ .type }}</div>
+      <div>query: {{ .query }}</div>
+      <div>
+        {{range .employees}}
+        <div>{{.}}</div>
+        {{end}}
+      </div>
+      {{if .show}}
+      <div>show: true</div>
+      {{end}}
+    </div>
+  </body>
 </html>
